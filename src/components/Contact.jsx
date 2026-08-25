@@ -1,35 +1,45 @@
-import { Mail, Code2 } from "lucide-react";
+import { Code2 } from "lucide-react";
+import { ContactMethods } from "../constants/Constants";
+import { motion } from "motion/react";
 
-const contactMethods = [
-  {
-    type: "EMAIL",
-    value: "hello@hrithik.dev",
-    href: "mailto:hello@hrithik.dev",
-    icon: Mail,
-  },
-  {
-    type: "LINKEDIN",
-    value: "in/hrithik-dev",
-    href: "https://linkedin.com/in/hrithik-dev",
-    icon: Mail,
-  },
-  {
-    type: "GITHUB",
-    value: "github.com/hrithik",
-    href: "https://github.com/hrithik",
-    icon: Mail,
-  },
-];
-
-export default function Contact({ contacts = contactMethods }) {
+export default function Contact() {
   return (
-    <section className="relative w-full bg-[#070C1A] text-white py-20 px-6 sm:px-12 lg:px-20 overflow-hidden">
-      {/* Background Ambient Glow */}
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-600/15 rounded-full blur-[150px] pointer-events-none" />
-
-      <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
+    <motion.section
+      className="relative w-full overflow-hidden py-15 bg-[#070C1A] px-5 md:px-10 lg:px-20"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{
+        once: true,
+        margin: "0px 0px -30% 0px",
+      }}
+      variants={{
+        hidden: {},
+        visible: {
+          transition: {
+            staggerChildren: 0.15,
+          },
+        },
+      }}
+    >
+      <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
         {/* Left Column: Heading, Subtitle & Contact Cards */}
-        <div className="lg:col-span-6 space-y-6">
+        <motion.div
+          className="lg:col-span-6 space-y-6"
+          variants={{
+            hidden: {
+              opacity: 0,
+              y: 80,
+            },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 0.7,
+                ease: "easeOut",
+              },
+            },
+          }}
+        >
           {/* Header Title */}
           <div>
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
@@ -42,16 +52,42 @@ export default function Contact({ contacts = contactMethods }) {
           </div>
 
           {/* Contact Cards Stack */}
-          <div className="space-y-3.5 pt-2 max-w-lg">
-            {contacts.map((contact, idx) => {
+          <motion.div
+            className="space-y-3.5 pt-2 max-w-lg"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.15, // Har card 0.15s ke delay se aayega
+                },
+              },
+            }}
+          >
+            {ContactMethods.map((contact, idx) => {
               const Icon = contact.icon;
               return (
-                <a
+                <motion.a
                   key={idx}
                   href={contact.href}
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center gap-4 rounded-2xl border border-slate-800/90 bg-[#111A2E]/90 p-4 sm:p-5 shadow-lg transition-all duration-200 hover:border-blue-500/70 hover:bg-[#15213B] hover:-translate-y-0.5 group"
+                  variants={{
+                    hidden: { opacity: 0, y: 40 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        type: "spring",
+                        stiffness: 100,
+                        damping: 15,
+                      },
+                    },
+                  }}
                 >
                   {/* Icon */}
                   {Icon && (
@@ -69,23 +105,57 @@ export default function Contact({ contacts = contactMethods }) {
                       {contact.value}
                     </p>
                   </div>
-                </a>
+                </motion.a>
               );
             })}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Right Column: Glowing Code Symbol Graphic (</>) */}
-        <div className="lg:col-span-6 flex items-center justify-center py-8">
+        <motion.div
+          className="lg:col-span-6 flex items-center justify-center py-8"
+          variants={{
+            hidden: {
+              opacity: 0,
+              y: 100,
+              scale: 0.95,
+            },
+            visible: {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              transition: {
+                duration: 0.8,
+                ease: "easeOut",
+              },
+            },
+          }}
+        >
           <div className="relative flex items-center justify-center w-72 h-72 sm:w-96 sm:h-96">
             {/* Glowing Blue Radial Backdrop */}
-            <div className="absolute inset-0 bg-blue-600/25 rounded-full blur-[100px] pointer-events-none" />
+            {/* <div className="absolute inset-0 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none" /> */}
+            <motion.div
+              className="bg-blue-600/40 absolute inset-0 rounded-full blur-[100px] pointer-events-none"
+              animate={{
+                opacity: [1, 0.4, 1],
+                boxShadow: [
+                  "0 0 10px rgba(59, 130, 246, 0.4)",
+                  "0 0 30px rgba(59, 130, 246, 0.9)",
+                  "0 0 10px rgba(59, 130, 246, 0.4)",
+                ],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
 
             {/* Code Symbol Icon */}
             <Code2 className="relative h-36 w-36 sm:h-48 sm:w-48 text-[#3B82F6]/90 stroke-[1.8] drop-shadow-[0_0_35px_rgba(59,130,246,0.6)]" />
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
