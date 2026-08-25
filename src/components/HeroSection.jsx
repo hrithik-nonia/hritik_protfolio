@@ -1,6 +1,55 @@
+// built in imports
+import { useState, useEffect } from "react";
+import { motion } from "motion/react";
+
+const WORDS = ["React Developer", "FastAPI Developer", "Full Stack Developer"];
+const TYPING_SPEED = 180; // Time per character when typing
+const DELETING_SPEED = 90; // Time per character when deleting
+const PAUSE_AFTER_WORD = 1000; // Pause when word is completely typed
+const PAUSE_AFTER_DELETE = 300; // Pause before typing next word
+
 export default function HeroSection({ onViewProjects, onDownloadResume }) {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentWord = WORDS[wordIndex];
+    let timer;
+    if (isDeleting) {
+      // Deleting characters
+      if (displayedText.length > 0) {
+        timer = setTimeout(() => {
+          setDisplayedText(currentWord.substring(0, displayedText.length - 1));
+        }, DELETING_SPEED);
+      } else {
+        // Fully deleted -> Pause then switch to next word
+        timer = setTimeout(() => {
+          setIsDeleting(false);
+          setWordIndex((prev) => (prev + 1) % WORDS.length);
+        }, PAUSE_AFTER_DELETE);
+      }
+    } else {
+      // Typing characters
+      if (displayedText.length < currentWord.length) {
+        timer = setTimeout(() => {
+          setDisplayedText(currentWord.substring(0, displayedText.length + 1));
+        }, TYPING_SPEED);
+      } else {
+        // Word complete -> Pause then start deleting
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, PAUSE_AFTER_WORD);
+      }
+    }
+    return () => clearTimeout(timer);
+  }, [displayedText, isDeleting, wordIndex]);
+
   return (
-    <section className="relative w-full min-h-screen bg-[#070C1A] text-white flex flex-col justify-center px-6 sm:px-16 lg:px-24 py-20 overflow-hidden">
+    <section
+      className="relative w-full min-h-screen bg-[#070C1A] text-white flex flex-col justify-center 
+    overflow-hidden px-5 md:px-10 lg:px-20"
+    >
       {/* BACKGROUND GLOW LAYERS */}
 
       {/* 1. Left Blue Spotlight Glow */}
@@ -33,8 +82,32 @@ export default function HeroSection({ onViewProjects, onDownloadResume }) {
         </h1>
 
         {/* Vertical Blue Indicator Line */}
-        <div className="py-1">
-          <span className="h-8 w-1 bg-[#3B82F6] rounded-full inline-block animate-pulse" />
+        <div className="inline-flex items-center text-[18px] text-purple-600/65 font-semibold tracking-tight min-w-[7ch]">
+          {/* Animated Characters */}
+          {displayedText.split("").map((char, index) => (
+            <motion.span
+              key={`${wordIndex}-${index}`}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.12, ease: "easeOut" }}
+              className="inline-block whitespace-pre"
+            >
+              {/* Fix: Normal space ko \u00A0 se replace kiya taaki space visible rahe */}
+              {char === " " ? "\u00A0" : char}
+            </motion.span>
+          ))}
+          {/* Blinking Cursor */}
+          <motion.span
+            animate={{ opacity: [1, 0, 1] }}
+            transition={{
+              repeat: Infinity,
+              duration: 0.8,
+              ease: "easeInOut",
+            }}
+            className="inline-block text-[#3B82F6] font-light ml-0.5 select-none"
+          >
+            |
+          </motion.span>
         </div>
 
         {/* Subtitle Description */}
