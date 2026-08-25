@@ -8,7 +8,7 @@ const DELETING_SPEED = 90; // Time per character when deleting
 const PAUSE_AFTER_WORD = 1000; // Pause when word is completely typed
 const PAUSE_AFTER_DELETE = 300; // Pause before typing next word
 
-export default function HeroSection({ onViewProjects, onDownloadResume }) {
+export default function HeroSection() {
   const [wordIndex, setWordIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -120,22 +120,23 @@ export default function HeroSection({ onViewProjects, onDownloadResume }) {
         {/* Action Buttons */}
         <div className="pt-6 flex flex-wrap items-center gap-4">
           {/* View Projects Button */}
-          <button
+          <a
+            href="#projects"
             type="button"
-            onClick={onViewProjects}
             className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#3B82F6] to-[#2563EB] px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-500/30 hover:from-[#2563EB] hover:to-[#1D4ED8] active:scale-[0.98] transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/40"
           >
             <span>View Projects</span>
-          </button>
+          </a>
 
           {/* Download Resume Button */}
-          <button
+          <a
+            href="/Hrithik_Nonia_Resume.pdf"
+            download="Hrithik_Nonia_Resume.pdf"
             type="button"
-            onClick={onDownloadResume}
             className="inline-flex items-center gap-2 rounded-xl border border-[#3B82F6]/70 bg-[#0F172A]/80 px-7 py-3.5 text-sm font-bold text-[#60A5FA] hover:bg-[#1E293B] hover:border-[#3B82F6] active:scale-[0.98] transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/30"
           >
             <span>Download Resume</span>
-          </button>
+          </a>
         </div>
       </div>
     </section>
