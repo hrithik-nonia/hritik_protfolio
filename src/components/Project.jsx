@@ -1,51 +1,58 @@
+import { motion } from "framer-motion";
 import { Code2, ExternalLink } from "lucide-react";
+import { ProjectData } from "../constants/Constants";
 
-const projects = [
-  {
-    id: 1,
-    title: "Electronics Store",
-    description:
-      "A full-stack e-commerce platform for electronics. Features include user authentication, product search, cart management, and payment integration.",
-    technologies: ["REACT", "NODE.JS", "MONGODB"],
-    githubUrl: "#github",
-    liveUrl: "#live",
-    gradient: "from-blue-500 to-purple-500",
-    techStyle: "bg-blue-950/80 text-blue-400 border-blue-900/60",
-  },
-  {
-    id: 2,
-    title: "Snip.ly",
-    description:
-      "A URL shortener service with detailed analytics. Built for high performance and quick redirects using modern backend technologies.",
-    technologies: ["FASTAPI", "PYTHON", "REDIS"],
-    githubUrl: "#github",
-    liveUrl: "#live",
-    gradient: "from-purple-500 to-cyan-500",
-    techStyle: "bg-purple-950/80 text-purple-300 border-purple-900/60",
-  },
-];
-
-export default function Projects({ items = projects }) {
+export default function Projects() {
   return (
-    <section className="relative w-full bg-[#070C1A] text-white py-20 px-6 sm:px-12 lg:px-20 overflow-hidden">
-      {/* Ambient Background Glow */}
-      <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none" />
-
-      <div className="relative max-w-6xl mx-auto space-y-10 z-10">
-        {/* Section Title */}
-        <div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+    <section className="relative w-full overflow-hidden py-15">
+      <div>
+        {/* Section Title (Left se Smooth Fade In) */}
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="pb-10"
+        >
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
             Featured Projects
           </h2>
           <div className="h-1 w-24 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2.5" />
-        </div>
+        </motion.div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {items.map((project) => (
-            <div
+        {/* Projects Grid (Staggered Bottom Slide In) */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.2, // Har project card 0.2s ke gap se aayega
+              },
+            },
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+        >
+          {ProjectData.map((project) => (
+            <motion.div
               key={project.id}
-              className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-800/90 bg-[#111A2E]/90 shadow-xl transition-all duration-300 hover:border-slate-700 hover:-translate-y-1"
+              variants={{
+                hidden: { opacity: 0, y: 45 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    type: "spring",
+                    stiffness: 90,
+                    damping: 16,
+                  },
+                },
+              }}
+              whileHover={{ y: -6, transition: { duration: 0.2 } }}
+              className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-800/90 bg-[#111A2E]/90 shadow-xl hover:border-slate-700 transition-colors"
             >
               {/* Top Colored Accent Bar */}
               <div
@@ -102,9 +109,9 @@ export default function Projects({ items = projects }) {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
