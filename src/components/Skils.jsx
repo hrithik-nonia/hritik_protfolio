@@ -3,7 +3,7 @@ import { SkillsData } from "../constants/Constants";
 
 export default function Skill() {
   return (
-    <section className="relative w-full overflow-hidden py-15">
+    <section className="relative w-full overflow-hidden py-15" id="skills">
       <div>
         {/* Section Heading (Smooth Top Fade In) */}
         <motion.div

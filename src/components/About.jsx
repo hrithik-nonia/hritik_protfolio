@@ -4,7 +4,7 @@ import profileImage from "../assets/profile.jpg";
 
 export default function About() {
   return (
-    <section className="relative w-full overflow-hidden py-25">
+    <section className="relative w-full overflow-hidden py-25" id="about">
       <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center z-10">
         {/* ========================================================= */}
         {/* STEP 1: LEFT COLUMN (TITLE & PARAGRAPHS)                  */}

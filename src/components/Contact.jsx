@@ -6,6 +6,7 @@ export default function Contact() {
   return (
     <motion.section
       className="relative w-full overflow-hidden py-15 bg-[#070C1A] px-5 md:px-10 lg:px-20"
+      id="contact"
       initial="hidden"
       whileInView="visible"
       viewport={{

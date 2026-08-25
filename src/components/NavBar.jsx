@@ -5,11 +5,11 @@ import { Menu, X } from "lucide-react";
 // custom imports
 import { NavItems } from "../constants/Constants";
 
-export default function Navbar({ activeSection = "About" }) {
+export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed  top-0 z-50 w-full border-b border-blue-900/40 backdrop-blur-md bg-black/10 ">
+    <header className="fixed  top-0 z-50 w-full border-b border-blue-900/10 backdrop-blur-md bg-black/10 ">
       <div className="px-10 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-18">
           {/* Left Brand Logo */}
@@ -26,11 +26,7 @@ export default function Navbar({ activeSection = "About" }) {
               <a
                 key={item.name}
                 href={item.href}
-                className={`text-sm font-semibold transition-colors ${
-                  activeSection === item.name
-                    ? "text-blue-400 font-bold"
-                    : "text-slate-200 hover:text-blue-400"
-                }`}
+                className="text-sm font-semibold transition-colors hover:text-blue-400 text-slate-200"
               >
                 {item.name}
               </a>

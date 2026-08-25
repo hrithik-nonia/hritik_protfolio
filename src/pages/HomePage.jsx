@@ -16,7 +16,7 @@ function HomePage() {
         </section>
 
         {/* information area */}
-        <section className=" bg-[#070C1A] px-5 md:py-10 lg:px-20">
+        <section className=" bg-[#070C1A] px-5 md:px-10 lg:px-20 text-white">
           {/* about me */}
           <section>
             <About />
@@ -41,11 +41,11 @@ function HomePage() {
           <section>
             <Languages />
           </section>
+        </section>
 
-          {/* contect */}
-          <section>
-            <Contact />
-          </section>
+        {/* contect */}
+        <section>
+          <Contact />
         </section>
       </section>
     </>

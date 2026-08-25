@@ -1,4 +1,4 @@
-import { Code2, Briefcase, AtSign } from "lucide-react";
+import { Code2 } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -19,29 +19,13 @@ export default function Footer() {
         {/* Right: Icon Links */}
         <div className="flex items-center gap-4 text-slate-400">
           <a
-            href="https://github.com"
+            href="https://github.com/hrithik-nonia"
             target="_blank"
             rel="noreferrer"
             className="hover:text-white transition-colors p-1"
             aria-label="GitHub Code"
           >
             <Code2 className="h-4.5 w-4.5 stroke-[2]" />
-          </a>
-
-          <a
-            href="#projects"
-            className="hover:text-white transition-colors p-1"
-            aria-label="Projects Portfolio"
-          >
-            <Briefcase className="h-4.5 w-4.5 stroke-[2]" />
-          </a>
-
-          <a
-            href="mailto:hello@hrithik.dev"
-            className="hover:text-white transition-colors p-1"
-            aria-label="Email Contact"
-          >
-            <AtSign className="h-4.5 w-4.5 stroke-[2]" />
           </a>
         </div>
       </div>

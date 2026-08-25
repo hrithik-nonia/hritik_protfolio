@@ -4,7 +4,7 @@ import { ProjectData } from "../constants/Constants";
 
 export default function Projects() {
   return (
-    <section className="relative w-full overflow-hidden py-15">
+    <section className="relative w-full overflow-hidden py-15" id="projects">
       <div>
         {/* Section Title (Left se Smooth Fade In) */}
         <motion.div

@@ -49,6 +49,7 @@ export default function HeroSection({ onViewProjects, onDownloadResume }) {
     <section
       className="relative w-full min-h-screen bg-[#070C1A] text-white flex flex-col justify-center 
     overflow-hidden px-5 md:px-10 lg:px-20"
+      id="hero"
     >
       {/* BACKGROUND GLOW LAYERS */}
 
