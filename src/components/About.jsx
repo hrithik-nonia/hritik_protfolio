@@ -1,20 +1,15 @@
-import { Box, Layers, BookOpen, User } from "lucide-react";
+import { Box, Layers, BookOpen } from "lucide-react";
+import profileImage from "../assets/profile.jpg";
 
-export default function About({
-  profileImage = "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800",
-}) {
+export default function About() {
   return (
-    <section className="relative w-full bg-[#070C1A] text-white py-20 px-6 sm:px-12 lg:px-20 overflow-hidden">
-      {/* Background Ambient Glows */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[150px] pointer-events-none" />
-
-      <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center z-10">
+    <section className="relative w-full overflow-hidden py-25">
+      <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center z-10">
         {/* Left Column: Title, Description & Feature Cards */}
         <div className="lg:col-span-7 space-y-6">
           {/* Section Heading */}
           <div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
               About Me
             </h2>
             <div className="h-1 w-14 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full mt-2.5" />
@@ -43,7 +38,7 @@ export default function About({
             <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-800/80 bg-[#111A2E]/80 p-4 sm:p-5 text-center shadow-md transition-transform hover:-translate-y-0.5">
               <Box className="h-6 w-6 text-blue-500 stroke-[2]" />
               <span className="mt-3 text-xs sm:text-sm font-bold text-white tracking-tight">
-                5+ Projects Built
+                2+ Projects Built
               </span>
             </div>
 
@@ -75,13 +70,6 @@ export default function About({
                 alt="Hrithik Developer"
                 className="w-full h-full object-cover opacity-85 group-hover:opacity-100 transition-opacity duration-300"
               />
-
-              {/* Overlay Icon Badge */}
-              <div className="absolute inset-0 flex items-center justify-center bg-slate-950/20">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900/80 border border-slate-700/80 text-white shadow-lg backdrop-blur-xs">
-                  <User className="h-6 w-6 stroke-[2]" />
-                </div>
-              </div>
             </div>
           </div>
         </div>
