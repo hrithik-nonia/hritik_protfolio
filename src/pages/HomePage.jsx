@@ -16,7 +16,7 @@ function HomePage() {
         </section>
 
         {/* information area */}
-        <section>
+        <section className=" bg-[#070C1A] px-5 md:py-10 lg:px-20">
           {/* about me */}
           <section>
             <About />
